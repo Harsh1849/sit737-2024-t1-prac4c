@@ -57,12 +57,12 @@
         <label for="calculation">Choose an Operation:</label>
         <select id="calculation" name="calculation" onchange="modifyInputVisibility()">
             <option value="add">Add</option>
-            <option value="subtract">Subtract</option>
-            <option value="multiply">Multiply</option>
-            <option value="divide">Divide</option>
-            <option value="power">Power</option>
-            <option value="root">Root</option>
-            <option value="remainder">Remainder</option>
+            <option value="sub">Subtract</option>
+            <option value="mul">Multiply</option>
+            <option value="div">Divide</option>
+            <option value="exp">Power</option>
+            <option value="sqrt">Root</option>
+            <option value="mod">Remainder</option>
         </select>
         <br>
         <label for="firstNumber">First Number:</label>
@@ -103,7 +103,7 @@
             fetch(endpoint)
                 .then(response => response.json())
                 .then(result => {
-                    document.getElementById('output').textContent = result.result;
+                    document.getElementById('output').textContent = result.data;
                 })
                 .catch(error => console.error('An error occurred:', error));
         }
