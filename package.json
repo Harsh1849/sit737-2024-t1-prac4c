@@ -1,0 +1,24 @@
+{
+  "name": "sit737-2024-t1-prac4c",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harsh1849/sit737-2024-t1-prac4c.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Harsh1849/sit737-2024-t1-prac4c/issues"
+  },
+  "homepage": "https://github.com/Harsh1849/sit737-2024-t1-prac4c#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "winston": "^3.13.0"
+  }
+}

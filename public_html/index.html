@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Math Solver</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #eaeaea;
+        }
+        .math-solver {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], select {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border: 1px solid #bbbbbb;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1e90ff;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+        button:hover {
+            background-color: #4169e1;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        #output {
+            color: #1e90ff;
+        }
+        .invisible {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="math-solver">
+        <h1>Math Solver</h1>
+        <label for="calculation">Choose an Operation:</label>
+        <select id="calculation" name="calculation" onchange="modifyInputVisibility()">
+            <option value="add">Add</option>
+            <option value="subtract">Subtract</option>
+            <option value="multiply">Multiply</option>
+            <option value="divide">Divide</option>
+            <option value="power">Power</option>
+            <option value="root">Root</option>
+            <option value="remainder">Remainder</option>
+        </select>
+        <br>
+        <label for="firstNumber">First Number:</label>
+        <input type="text" id="firstNumber" name="firstNumber">
+        <br>
+        <div id="secondNumberSection">
+            <label for="secondNumber">Second Number:</label>
+            <input type="text" id="secondNumber" name="secondNumber">
+            <br>
+        </div>
+        <button onclick="performCalculation()">Solve</button>
+        <h2>Answer: <span id="output">0</span></h2>
+    </div>
+    <script>
+        function modifyInputVisibility() {
+            const chosenOperation = document.getElementById('calculation').value;
+            const secondNumSection = document.getElementById('secondNumberSection');
+            if (chosenOperation === 'root') {
+                secondNumSection.classList.add('invisible');
+            } else {
+                secondNumSection.classList.remove('invisible');
+            }
+        }
+
+        function performCalculation() {
+            const firstNum = document.getElementById('firstNumber').value;
+            const secondNum = document.getElementById('secondNumber').value;
+            const operationType = document.getElementById('calculation').value;
+            
+            let endpoint = `http://localhost:3000/${operationType}?`;
+
+            if (operationType === 'root') {
+                endpoint += `num1=${firstNum}`;
+            } else {
+                endpoint += `num1=${firstNum}&num2=${secondNum}`;
+            }
+
+            fetch(endpoint)
+                .then(response => response.json())
+                .then(result => {
+                    document.getElementById('output').textContent = result.result;
+                })
+                .catch(error => console.error('An error occurred:', error));
+        }
+
+        window.addEventListener('load', modifyInputVisibility);
+    </script>
+</body>
+</html>
